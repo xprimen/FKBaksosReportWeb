@@ -61,15 +61,16 @@ export default function Page() {
     writeFileXLSX(wb, `Transaksi ${transaksi.title}.xlsx`);
   };
 
-  const transformData = (data: TTransaksi[]): TTransaksi[] => {
-    const newData = data.map((d) => ({
+  const transformData = (data: TTransaksi[]) => {
+    return data.map((d) => ({
       ...d,
       tgl_iuran: moment(d.tgl_iuran).format("D.M.YY"),
       jumlah: numberToString(d.jumlah),
       iuran_terakhir:
-        Number(d.iuran_terakhir) > 0 ? numberToString(d.iuran_terakhir) : null,
-    }));
-    return newData;
+        Number(d.iuran_terakhir) > 0
+          ? numberToString(Number(d.iuran_terakhir))
+          : null,
+    })) as TTransaksi[];
   };
 
   return (

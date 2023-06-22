@@ -56,14 +56,6 @@ const DropZoneArea = ({
     disabled,
   });
 
-  function removeAll() {
-    console.log("removeAll...");
-    acceptedFiles.length = 0;
-    acceptedFiles.splice(0, acceptedFiles.length);
-    inputRef.current.value = "";
-    console.log(acceptedFiles);
-  }
-
   const acceptedFileItems = files.map((file, i) => {
     return <li key={String(i)}>{file.name}</li>;
   });
@@ -83,7 +75,7 @@ const DropZoneArea = ({
     if (files.length > 0) {
       sendFiles(files);
     }
-  }, [files]);
+  }, [files, sendFiles]);
 
   useEffect(() => {
     if (processingFiles) {

@@ -85,7 +85,7 @@ export const mainReducer = (state: MainData, action: MainActions): MainData => {
         },
       };
     case ActionTypes.SuccessSaveBulkAnggota:
-      console.log("save to localStorage");
+      // console.log("save to localStorage");
       localStorage.setItem("anggota", JSON.stringify(action.payload));
       return {
         ...state,

@@ -1,4 +1,4 @@
-export const numberToString = (number) => {
+export const numberToString = (number: number) => {
   const number_string = number.toString(),
     divided = number_string.length % 3;
   let numbering = number_string.substr(0, divided),

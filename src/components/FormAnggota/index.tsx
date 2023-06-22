@@ -1,10 +1,10 @@
-import axios from "axios";
 import moment from "moment";
 import { useContext, useState } from "react";
 import { read, utils } from "xlsx";
 import { AppContext } from "../../context/context";
 import { ActionTypes } from "../../context/reducer";
 import DropZoneArea from "../DropZoneArea";
+import { TAnggota } from "@/helpers/types";
 
 export type IFormInput = {
   title: string;
@@ -30,25 +30,33 @@ const FormAnggota = () => {
       const file = files[0];
       const reader = new FileReader();
       reader.onload = async (event) => {
-        const wb = read(event.target.result);
+        const wb = read(event?.target?.result);
         const sheets = wb.SheetNames;
 
         if (sheets.length) {
           const newDate = moment().unix();
           const rows = utils.sheet_to_json(wb.Sheets[sheets[0]]);
-          let mapData = rows.map((d) => {
+
+          let mapData = rows.map((d: any) => {
             if (d["NO"]) {
               return {
-                nomor: d["NO"],
-                nama: d["NAMA"],
-                mawil: d["MAWIL"],
+                nomor: String(d["NO"]),
+                nama: String(d["NAMA"]),
+                mawil: String(d["MAWIL"]),
                 dateCreated: newDate,
                 dateUpdated: newDate,
+              };
+            } else {
+              return {
+                nomor: "",
+                nama: "",
+                mawil: "",
+                dateCreated: 0,
+                dateUpdated: 0,
               };
             }
           });
 
-          // setData(mapData);
           try {
             dispatch({
               type: ActionTypes.SuccessCleanAnggota,

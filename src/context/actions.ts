@@ -47,7 +47,8 @@ export const saveAnggota = async (
   dispatch({
     type: ActionTypes.LoadingAnggota,
   });
-  let data: TAnggota[] = JSON.parse(localStorage.getItem("anggota"));
+  const local = localStorage.getItem("anggota") || "";
+  let data: TAnggota[] = JSON.parse(local);
   const id = data.findIndex((x) => x.nomor === row.nomor);
   data[id] = row;
   try {
@@ -90,9 +91,8 @@ export const saveTransaksi = async (
   dispatch({
     type: ActionTypes.LoadingTransaksi,
   });
-  let data: { data: TTransaksi[]; title: string } = JSON.parse(
-    localStorage.getItem("transaksi")
-  );
+  const local = localStorage.getItem("transaksi") || "";
+  let data: { data: TTransaksi[]; title: string } = JSON.parse(local);
   const id = data.data.findIndex((x) => {
     // console.log("x.seq", x.seq);
     // console.log("row.seq", Number(row.seq));
@@ -120,9 +120,8 @@ export const deleteTransaksi = async (
   dispatch({
     type: ActionTypes.LoadingTransaksi,
   });
-  let getData: { data: TTransaksi[]; title: string } = JSON.parse(
-    localStorage.getItem("transaksi")
-  );
+  const local = localStorage.getItem("transaksi") || "";
+  let getData: { data: TTransaksi[]; title: string } = JSON.parse(local);
   const index = getData.data.findIndex((x) => {
     // console.log("x.seq", x.seq);
     // console.log("row.seq", Number(row.seq));
